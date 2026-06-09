@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist Colaborativa Utilizando JQuery</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Playlist Colaborativa</h1>
+
+        <div class="card form-container">
+            <h2>Adicionar Música</h2>
+            <input type="text" id="nome" placeholder="Nome da música">
+            <input type="text" id="autor" placeholder="Autor">
+            <input type="text" id="duracao" placeholder="Duração (ex: 3:45)">
+            <input type="text" id="colaborador" placeholder="Seu nome (Colaborador)">
+            <input type="url" id="link" placeholder="Link da música">
+            <button id="btnSalvar">Salvar na Tabela</button>
+        </div>
+
+        <div class="card json-container">
+            <h2>Importar / Exportar</h2>
+            <textarea id="jsonArea" rows="5" placeholder="Cole o código JSON aqui para importar ou clique em Exportar para gerar o código da sua playlist atual..."></textarea>
+            <div class="botoes-json">
+                <button id="btnImportar" class="btn-secundario">⬇️ Importar JSON</button>
+                <button id="btnExportar" class="btn-secundario">⬆️ Exportar JSON</button>
+            </div>
+        </div>
+
+        <div class="card table-container">
+            <h2>Nossa Playlist</h2>
+            <table id="tabelaPlaylist">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Autor</th>
+                        <th>Duração</th>
+                        <th>Colaborador</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody id="corpoTabela">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+    <script src="../atividade_json/script.js"></script>
+    <script src="../atividade_json/style.css"></script>
+</body>
+</html>

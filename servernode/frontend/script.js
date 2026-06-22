@@ -2,6 +2,29 @@
 
     let jogos = [];
 
+document
+    .getElementById("btnCadastrar")
+    .addEventListener("click", cadastrar);
+
+async function cadastrar() {
+    const response = await fetch("/jogos", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            id: document.getElementById("id").value,
+            nome: document.getElementById("nome").value,
+            genero: document.getElementById("genero").value,
+            ano: document.getElementById("ano").value
+        })
+    });
+
+    const dados = await response.json();
+    console.log(dados);
+}
+
+
     async function buscarJogos() {
     try {
         const resposta = await fetch("http://localhost:3000/jogos");

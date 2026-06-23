@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="./style.css">
+<title>Lista de Compras</title>
+</head>
+<body>
+
+<h1>Lista de Compras</h1>
+
+<input type="text" id="nome" placeholder="Nome do item">
+<input type="text" id="valor" placeholder="Valor do item">
+<input type="text" id="quantidade" placeholder="Quantidade de itens">
+<button onclick="adicionar()">Adicionar</button>
+<button onclick="abrirPopup()">Alterar</button>
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <h2>Alterar Produto</h2>
+
+        <label>ID</label>
+        <input type="text" id="id" readonly>
+
+        <label>Nome</label>
+        <input type="text" id="nome">
+
+        <label>Valor</label>
+        <input type="number" id="valor">
+
+        <label>Quantidade</label>
+        <input type="number" id="quantidade">
+
+        <br><br>
+
+        <button onclick="fecharPopup()">Fechar</button>
+        <button onclick="adicionar()">Alterar</button>
+    </div>
+</div>
+<script>
+function abrirPopup() {
+    document.getElementById("popup").style.display = "block";
+}
+
+function fecharPopup() {
+    document.getElementById("popup").style.display = "none";
+}
+</script>
+<button onclick="abrirPopupDeletar()">Deletar</button>
+
+<div id="popupDeletar" class="popupdeletar">
+    <div class="popup-content">
+        <h2>Deletar Carrinho</h2>
+
+        <label>Procurar Carrinho</label>
+        <input type="text" id="buscarCarrinho" placeholder="Digite o ID ou nome do carrinho">
+
+        <br><br>
+
+        <button onclick="deletar()">Deletar</button>
+        <button onclick="fecharPopupDeletar()">Cancelar</button>
+    </div>
+</div>
+
+<script>
+function abrirPopupDeletar() {
+    document.getElementById("popupDeletar").style.display = "block";
+}
+
+function fecharPopupDeletar() {
+    document.getElementById("popupDeletar").style.display = "none";
+}
+
+function deletar() {
+    const carrinho = document.getElementById("buscarCarrinho").value;
+
+    console.log("Carrinho a deletar:", carrinho);
+
+    fecharPopupDeletar();
+}
+</script>
+<hr>
+    <table border="1" class="tabelaCimaLista">
+        <thead class="tabelaCimaListaitens">
+            <tr>
+                <th>Nome</th>
+                <th>Valor</th>
+                <th>Quantidade</th>
+            </tr>
+        </thead>
+    </table>
+    <tbodyi id="tabelaCarrinho"></tbody>
+        <script src="./script.js"></script>
+</body>
+</html>

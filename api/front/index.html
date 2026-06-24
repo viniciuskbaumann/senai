@@ -10,36 +10,45 @@
 
 <h1>Lista de Compras</h1>
 
-<input type="text" id="nome" placeholder="Nome do item">
+<input type="text" id="id" hidden>
+<input type="text" id="produto" placeholder="Nome do item">
 <input type="text" id="valor" placeholder="Valor do item">
 <input type="text" id="quantidade" placeholder="Quantidade de itens">
-<button onclick="adicionar()">Adicionar</button>
-<button onclick="abrirPopup()">Alterar</button>
+<button onclick="cadastrar()">Adicionar</button>
 <div id="popup" class="popup">
     <div class="popup-content">
         <h2>Alterar Produto</h2>
 
         <label>ID</label>
-        <input type="text" id="id" readonly>
+        <input type="text" id="id-popup" readonly> 
 
-        <label>Nome</label>
-        <input type="text" id="nome">
+        <label>Produto</label>
+        <input type="text" id="produto-popup">
 
         <label>Valor</label>
-        <input type="number" id="valor">
+        <input type="number" id="valor-popup">
 
         <label>Quantidade</label>
-        <input type="number" id="quantidade">
+        <input type="number" id="quantidade-popup">
 
         <br><br>
 
         <button onclick="fecharPopup()">Fechar</button>
-        <button onclick="adicionar()">Alterar</button>
+        <button onclick="alterar()">Alterar</button>
     </div>
 </div>
 <script>
-function abrirPopup() {
+function abrirPopup(id, produto, valor, quantidade) {
     document.getElementById("popup").style.display = "block";
+
+    document.getElementById("id-popup").value = id;
+    document.getElementById("produto-popup").value = produto;
+    document.getElementById("valor-popup").value = valor;
+    document.getElementById("quantidade-popup").value = quantidade;
+}
+
+function fecharPopup() {
+    document.getElementById("popup").style.display = "none";
 }
 
 function fecharPopup() {
@@ -83,13 +92,13 @@ function deletar() {
     <table border="1" class="tabelaCimaLista">
         <thead class="tabelaCimaListaitens">
             <tr>
-                <th>Nome</th>
+                <th>Produto</th>
                 <th>Valor</th>
                 <th>Quantidade</th>
             </tr>
         </thead>
+        <tbody id="tabelaCarrinho"></tbody>
     </table>
-    <tbodyi id="tabelaCarrinho"></tbody>
         <script src="./script.js"></script>
 </body>
 </html>

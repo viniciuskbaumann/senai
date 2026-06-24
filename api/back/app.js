@@ -9,16 +9,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-let carrinho = [
-    {
-        id: 1,
-        nome: "Arroz"
-    },
-    {
-        id: 2,
-        nome: "Feijão"
-    }
-]
+let carrinho = [];
 
 app.get("/carrinho", (req, res) => {
     res.json(carrinho);
@@ -27,7 +18,7 @@ app.get("/carrinho", (req, res) => {
 app.post("/carrinho", (req, res) => {
     const valorescarrinho = {
         id: carrinho.length + 1,
-        produto: req.body.nome, 
+        produto: req.body.produto, 
         valor: req.body.valor, 
         quantidade: req.body.quantidade
     };
@@ -42,7 +33,7 @@ app.put("/carrinho/:id", (req, res) => {
         carrinho => carrinho.id == req.params.id
     );
 
-    alterar.produto = req.body.nome, 
+    alterar.produto = req.body.produto, 
     alterar.valor = req.body.valor, 
     alterar.quantidade = req.body.quantidade
 
@@ -50,11 +41,13 @@ app.put("/carrinho/:id", (req, res) => {
 })
 
 app.delete("/carrinho/:id", (req, res) => {
-    const deletar = carrinho.find(
-        del => del.id != req.params.id
+    carrinho = carrinho.filter(
+        item => item.id != req.params.id
     );
     res.send("Carrinho Excluido com sucesso");
 });
+
+app.use(express.static("../front"));
 
 app.listen(3000, () => {
     console.log("http://localhost:3000");

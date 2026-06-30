@@ -5,15 +5,16 @@ document.getElementById("tabelaCarrinho").innerHTML = '';
     for (let i = 0; i < carrinho.length; i++) {
         let linha = `
         <tr>
+            <td>${carrinho[i].id}</td>
             <td>${carrinho[i].produto}</td>
             <td>${carrinho[i].valor}</td>
             <td>${carrinho[i].quantidade}</td>
-            <button onclick="abrirPopup(
+            <td><button onclick="abrirPopup(
             ${carrinho[i].id},
             '${carrinho[i].produto}',   
             ${carrinho[i].valor},
             ${carrinho[i].quantidade}
-        )">Alterar</button>
+        )" class = "botaoalterar">Alterar</button>
             </td>
         </tr>
         `;
@@ -26,7 +27,7 @@ async function cadastrar() {
     let produto = document.getElementById('produto').value;
     let valor = document.getElementById('valor').value;
     let quantidade = document.getElementById('quantidade').value;
-        if (id == '') {
+        if (id == '' && produto != '' && valor != '' && quantidade != '') {
             await fetch("/carrinho", {
                 method: "POST",
                 headers: {
@@ -91,3 +92,81 @@ async function deletar() {
 }
 
 consultar();
+
+async function imprimirLista() {
+    const resposta = await fetch("/carrinho");
+    const carrinho = await resposta.json();
+
+    let tabela = `
+    <html>
+    <head>
+        <title>Lista de Compras</title>
+        <style>
+            body{
+                font-family: Arial, sans-serif;
+                padding:30px;
+            }
+
+            h1{
+                text-align:center;
+            }
+
+            table{
+                width:100%;
+                border-collapse:collapse;
+                margin-top:20px;
+            }
+
+            th, td{
+                border:1px solid #000;
+                padding:10px;
+                text-align:left;
+            }
+
+            th{
+                background:#f2f2f2;
+            }
+        </style>
+    </head>
+    <body>
+
+        <h1>Lista de Compras</h1>
+
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Produto</th>
+                <th>Valor</th>
+                <th>Quantidade</th>
+            </tr>
+    `;
+
+    carrinho.forEach(item => {
+        tabela += `
+            <tr>
+                <td>${item.id}</td>
+                <td>${item.produto}</td>
+                <td>R$ ${Number(item.valor).toFixed(2)}</td>
+                <td>${item.quantidade}</td>
+            </tr>
+        `;
+    });
+
+    tabela += `
+        </table>
+
+        <script>
+            window.onload = function(){
+                window.print();
+                window.close();
+            }
+        <\/script>
+
+    </body>
+    </html>
+    `;
+
+    const janela = window.open("", "", "width=900,height=700");
+    janela.document.write(tabela);
+    janela.document.close();
+}

@@ -32,7 +32,7 @@ echo.
 echo ==========================================================
 echo.
 
-node servernode\backend\server.js
+node SENAI/api/back/app.js
 
 echo.
 echo ==========================================================

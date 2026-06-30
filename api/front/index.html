@@ -34,12 +34,14 @@
         <br><br>
 
         <button onclick="fecharPopup()">Fechar</button>
-        <button onclick="alterar()">Alterar</button>
+        <button onclick="alterar()" class="botaoalterar">Alterar</button>
     </div>
 </div>
 <script>
 function abrirPopup(id, produto, valor, quantidade) {
-    document.getElementById("popup").style.display = "block";
+    const popup = document.getElementById("popup");
+
+    popup.style.display = "flex"; 
 
     document.getElementById("id-popup").value = id;
     document.getElementById("produto-popup").value = produto;
@@ -50,12 +52,9 @@ function abrirPopup(id, produto, valor, quantidade) {
 function fecharPopup() {
     document.getElementById("popup").style.display = "none";
 }
-
-function fecharPopup() {
-    document.getElementById("popup").style.display = "none";
-}
 </script>
-<button onclick="abrirPopupDeletar()">Deletar</button>
+<button onclick="abrirPopupDeletar()" class="botaodeletar">Deletar</button>
+<button onclick="imprimirLista()" class="imprimir">🖨️ Imprimir Lista</button>
 
 <div id="popupDeletar" class="popupdeletar">
     <div class="popup-content">
@@ -66,14 +65,14 @@ function fecharPopup() {
 
         <br><br>
 
-        <button onclick="deletar()">Deletar</button>
+        <button onclick="deletar()" class="botaodeletar">Deletar</button>
         <button onclick="fecharPopupDeletar()">Cancelar</button>
     </div>
 </div>
 
 <script>
 function abrirPopupDeletar() {
-    document.getElementById("popupDeletar").style.display = "block";
+    document.getElementById("popupDeletar").style.display = "flex";
 }
 
 function fecharPopupDeletar() {
@@ -89,14 +88,18 @@ function deletar() {
 }
 </script>
 <hr>
-    <table border="1" class="tabelaCimaLista">
-        <thead class="tabelaCimaListaitens">
+
+    <table class="tabelaCimaLista">
+        <thead>
             <tr>
+                <th>ID</th>
                 <th>Produto</th>
                 <th>Valor</th>
                 <th>Quantidade</th>
+                <th>Ações</th>
             </tr>
         </thead>
+
         <tbody id="tabelaCarrinho"></tbody>
     </table>
         <script src="./script.js"></script>
